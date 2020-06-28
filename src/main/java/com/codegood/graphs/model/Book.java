@@ -1,7 +1,9 @@
 package com.codegood.graphs.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -14,14 +16,10 @@ import java.util.Set;
 
 @NodeEntity(label = "Book")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Book {
-	public Book() {
-	}
-
-	public Book(String name) {
-		this.name = name;
-	}
-
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -30,9 +28,12 @@ public class Book {
 	private String name;
 
 	@Relationship(type = "BOOK_AUTHORS")
-	private Set<Author> authors = new HashSet<>();
+	private Set<Author> authors;
 	
 	public void addAuthor(Author author) {
+		if (authors == null) {
+			this.authors = new HashSet<>();
+		}
 		authors.add(author);
 	}
 }

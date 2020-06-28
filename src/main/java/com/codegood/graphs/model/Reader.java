@@ -1,5 +1,7 @@
 package com.codegood.graphs.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -12,8 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @NodeEntity(label = "Reader")
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class Reader {
 
     @Id
@@ -21,10 +24,10 @@ public class Reader {
     private Long id;
 
     @Property(name = "name")
-    private final String name;
+    private String name;
 
     @Relationship(type = "READER_BOOKS")
-    private final Set<Book> books = new HashSet<>();
+    private Set<Book> books = new HashSet<>();
 
     public void addBook(Book book) {
         books.add(book);

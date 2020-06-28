@@ -2,11 +2,14 @@ package com.codegood.graphs.config;
 
 import com.codegood.graphs.controller.Command;
 import com.codegood.graphs.controller.CreateAuthorCommand;
+import com.codegood.graphs.controller.CreateBookCommand;
+import com.codegood.graphs.controller.CreateReaderCommand;
 import com.codegood.graphs.controller.DeleteAuthorCommand;
 import com.codegood.graphs.controller.ExitCommand;
 import com.codegood.graphs.controller.ReadAllAuthorBooksCommand;
 import com.codegood.graphs.controller.ReadAllAuthorsCommand;
 import com.codegood.graphs.controller.ReadAllBooksCommand;
+import com.codegood.graphs.controller.ReadAllReadersCommand;
 import com.codegood.graphs.repository.AuthorRepository;
 import com.codegood.graphs.repository.BookRepository;
 import com.codegood.graphs.repository.LibrarianRepository;
@@ -38,7 +41,10 @@ public class ApplcationConfig {
         commands.add(new ReadAllAuthorsCommand(view, authorRepository));
         commands.add(new DeleteAuthorCommand(view, authorRepository));
         commands.add(new ReadAllBooksCommand(view, bookRepository));
+        commands.add(new CreateBookCommand(view,bookRepository, authorRepository));
         commands.add(new ReadAllAuthorBooksCommand(view, bookRepository, authorRepository));
+        commands.add(new CreateReaderCommand(view, readerRepository));
+        commands.add(new ReadAllReadersCommand(view, readerRepository));
         commands.add(new ExitCommand());
         return commands;
     }
